@@ -1,0 +1,28 @@
+{
+  "name": "furigana",
+  "version": "1.0.0",
+  "description": "resources/ に入っている json ファイルオブジェクトの１層目の value をひらがなに変換します。",
+  "main": "convert.ts",
+  "scripts": {
+    "start": "ts-node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Numa-Lab/Furigana.git"
+  },
+  "keywords": [
+    "Yahoo"
+  ],
+  "author": "Numa-Lab",
+  "contributors": [
+    "TwoSquirrels"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Numa-Lab/Furigana/issues"
+  },
+  "homepage": "https://github.com/Numa-Lab/Furigana#readme",
+  "dependencies": {
+    "axios": "^0.25.0"
+  }
+}
