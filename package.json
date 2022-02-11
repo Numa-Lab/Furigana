@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/Numa-Lab/Furigana#readme",
   "dependencies": {
-    "@koozaki/romaji-conv": "^2.0.17",
     "@types/fs-extra": "^9.0.13",
     "@types/koozaki__romaji-conv": "^2.0.0",
     "axios": "^0.25.0",
