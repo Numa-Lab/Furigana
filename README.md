@@ -5,12 +5,12 @@
 
 [Yahoo! の API](https://developer.yahoo.co.jp/webapi/jlp/furigana/v2/furigana.html) を利用しています。  
 
-[僕](@github/TwoSquirrels)が (Numa-Lab として) 作った！  
+[僕](@github/TwoSquirrels)が (NumaLab., として) 作った！  
 
 ## License
 
 [MIT License](/LICENSE)  
-`(C) 2022 Numa-Lab`  
+`(C) 2022 NumaLab.,`  
 
 ## Usage
 
