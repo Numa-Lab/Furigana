@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import fs from "fs-extra";
 import glob from "glob-promise";
 
+const DEBUG = false;
 const config = require("./config.json");
 
 (async () => {
@@ -74,8 +75,10 @@ const config = require("./config.json");
                 charCode <= "ゖ".charCodeAt(0)) ||
               charCode === "ー".charCodeAt(0)
             )
-          )
+          ) {
+            if (DEBUG) console.error(`Excluded "${char}" in "${file[key]}"!`);
             return "";
+          }
           if (config.normalize?.dakuten_handakuten === true) {
             // remove dakuten
             if (
