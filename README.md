@@ -3,9 +3,9 @@
 `resources/` に入っている json ファイルオブジェクトの１層目の value をひらがなに変換します。  
 あと `"オークの"` は削除します。  
 
-[Yahoo! の API](https://developer.yahoo.co.jp/webapi/jlp/furigana/v2/furigana.html) を利用しています。  
+[Yahoo! の API](//developer.yahoo.co.jp/webapi/jlp/furigana/v2/furigana.html) を利用しています。  
 
-[僕](@github/TwoSquirrels)が (NumaLab., として) 作った！  
+[僕](//github.com/TwoSquirrels)が (NumaLab., として) 作った！  
 
 ## License
 
