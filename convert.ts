@@ -19,8 +19,8 @@ const config = require("./config.json");
     };
 
     // convert
-    let i = 1,
-      n = Object.keys(file).length;
+    let count = 1;
+    const n = Object.keys(file).length;
     for (let key of Object.keys(file)) {
       if (typeof file[key] !== "string") continue;
       let value: string = file[key];
@@ -58,18 +58,79 @@ const config = require("./config.json");
         for (const from of Object.keys(config.replace))
           value = value.replaceAll(from, config.replace[from]);
       }
-      // katakana to hiragana
-      // remove dakuten and handakuten
-      // normalize small char
 
-      console.log(
-        `${i.toString().padStart(5, "0")} ` +
-          `(${Math.floor((100 * i) / n)
-            .toString()
-            .padStart(3, " ")}%): ` +
-          `"${file[key]}"\n           -> "${value}"`
-      );
-      i++;
+      // normalize hiragana
+      value = value
+        .split("")
+        .map((char) => {
+          let charCode = char.charCodeAt(0);
+          // katakana to hiragana
+          if (charCode >= "ァ".charCodeAt(0) && charCode <= "ヶ".charCodeAt(0))
+            charCode += "ぁ".charCodeAt(0) - "ァ".charCodeAt(0);
+          // exclude not hiragana
+          if (
+            !(
+              (charCode >= "ぁ".charCodeAt(0) &&
+                charCode <= "ゖ".charCodeAt(0)) ||
+              charCode === "ー".charCodeAt(0)
+            )
+          )
+            return "";
+          if (config.normalize?.dakuten_handakuten === true) {
+            // remove dakuten
+            if (
+              (charCode >= "か".charCodeAt(0) &&
+                charCode < "っ".charCodeAt(0) &&
+                charCode % 2 === 0) ||
+              (charCode >= "つ".charCodeAt(0) &&
+                charCode < "な".charCodeAt(0) &&
+                charCode % 2 === 1) ||
+              (charCode >= "は".charCodeAt(0) &&
+                charCode < "ま".charCodeAt(0) &&
+                charCode % 3 === 1)
+            )
+              return String.fromCharCode(charCode - 1);
+            if (charCode === "ゔ".charCodeAt(0)) return "う";
+            // remove han-dakuten
+            if (
+              charCode >= "は".charCodeAt(0) &&
+              charCode < "ま".charCodeAt(0) &&
+              charCode % 3 === 2
+            )
+              return String.fromCharCode(charCode - 2);
+          }
+          // normalize small char
+          if (config.normalize?.small === true) {
+            if (
+              (((charCode >= "ぁ".charCodeAt(0) &&
+                charCode < "か".charCodeAt(0)) ||
+                (charCode >= "ゃ".charCodeAt(0) &&
+                  charCode < "ら".charCodeAt(0))) &&
+                charCode % 2 === 1) ||
+              charCode === "っ".charCodeAt(0) ||
+              charCode === "ゎ".charCodeAt(0)
+            )
+              return String.fromCharCode(charCode + 1);
+            if (charCode === "ゕ".charCodeAt(0)) return "か";
+            if (charCode === "ゖ".charCodeAt(0)) return "け";
+          }
+          // normal hiragana
+          return String.fromCharCode(charCode);
+        })
+        .join("");
+
+      if (config.word_log === true) {
+        console.log(
+          `${count.toString().padStart(n.toString().length, "0")}/${n} ` +
+            `(${Math.floor((100 * count) / n)
+              .toString()
+              .padStart(3, " ")}%): ` +
+            `"${file[key]}"\n` +
+            " ".repeat(n.toString().length * 2) +
+            `       -> "${value}"`
+        );
+        count++;
+      }
       file[key] = value;
     }
 
@@ -83,5 +144,5 @@ const config = require("./config.json");
     console.log(`\nSaved ${fileName}!\n`);
   }
 
-  console.log("=== DONE ALL! ===");
+  console.log("=== DONE ALL! ===\n");
 })().catch(console.error);
