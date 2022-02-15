@@ -1,6 +1,7 @@
 {
   "word_log": true,
   "normalize": {
+    "symbolic": false,
     "dakuten_handakuten": false,
     "small": false
   },
@@ -15,7 +16,7 @@
     "いろがわりか": "いろへんか",
     "ようほうはこ": "ようほうばこ",
     "はいり": "いり",
-    "%s の": "",
+    "・": "",
     "TNT": "ばくだん"
   }
 }

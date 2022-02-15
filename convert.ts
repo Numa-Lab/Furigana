@@ -70,6 +70,7 @@ const config = require("./config.json");
             charCode += "ぁ".charCodeAt(0) - "ァ".charCodeAt(0);
           // exclude not hiragana
           if (
+            config.normalize?.symbolic === true &&
             !(
               (charCode >= "ぁ".charCodeAt(0) &&
                 charCode <= "ゖ".charCodeAt(0)) ||
