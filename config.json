@@ -1,8 +1,8 @@
 {
   "word_log": true,
   "normalize": {
-    "dakuten_handakuten": true,
-    "small": true
+    "dakuten_handakuten": false,
+    "small": false
   },
   "replace": {
     "ダークオーク": "黒樫",
@@ -14,7 +14,7 @@
     "ようにく": "ひつじにく",
     "": "",
     "%s の": "",
-    "TNT": "ティーエヌティー",
+    "TNT": "ばくだん",
     "ヴィ": "ビ",
     "ヴェ": "ベ",
     "ヴォ": "ボ"
