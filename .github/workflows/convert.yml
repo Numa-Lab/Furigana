@@ -1,0 +1,35 @@
+name: convert
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  convert:
+    name: Release converted hiragana
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Assert secrets
+        uses: actions/github-script@v5
+        env:
+          YAHOO_APP_ID: ${{ secrets.YAHOO_APP_ID }}
+        with:
+          script: |
+            if (!process.env.YAHOO_APP_ID) throw new Error("YAHOO_APP_ID is not set in secrets.");
+      - uses: actions/checkout@v2
+      - uses: bahmutov/npm-install@v1
+      - name: Convert to hiragana
+        env:
+          YAHOO_APP_ID: ${{ secrets.YAHOO_APP_ID }}
+        run: npm start
+      - name: Release hiragana json
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ github.event.commits[0].messageHeadline }}
+          body: |
+            ${{ github.event.commits[0].messageBody }}
+
+            commit: [${{ github.event.commits[0].abbreviatedOid }}](${{ github.event.commits[0].url }})
+          files: results/**/*.json

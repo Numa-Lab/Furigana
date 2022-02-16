@@ -149,4 +149,8 @@ const config = require("./config.json");
   }
 
   console.log("=== DONE ALL! ===\n");
-})().catch(console.error);
+})().catch((error: unknown) => {
+  if (axios.isAxiosError(error))
+    console.error((error.toJSON() as { stack: string }).stack);
+  else console.error(error);
+});
