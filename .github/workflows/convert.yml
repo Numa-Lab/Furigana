@@ -9,7 +9,7 @@ jobs:
   convert:
     name: Release converted hiragana
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Assert secrets
         uses: actions/github-script@v5
