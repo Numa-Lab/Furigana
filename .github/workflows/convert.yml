@@ -24,12 +24,8 @@ jobs:
         env:
           YAHOO_APP_ID: ${{ secrets.YAHOO_APP_ID }}
         run: npm start
-      - name: Release hiragana json
-        uses: softprops/action-gh-release@v1
+      - name: Upload hiragana json
+        uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.event.commits[0].messageHeadline }}
-          body: |
-            ${{ github.event.commits[0].messageBody }}
-
-            commit: [${{ github.event.commits[0].abbreviatedOid }}](${{ github.event.commits[0].url }})
-          files: results/**/*.json
+          name: results
+          path: results/
